@@ -1,0 +1,20 @@
+1. 讓編輯器顯示空格和 Tab 符號
+打開 Preferences → Settings
+在右側的用戶設定（User Settings）中加入：
+{
+    "draw_white_space": "all"
+}
+
+
+2. 把python的輸出複製到output.txt
+{
+    "shell_cmd": "python3 \"$file\" | tee \"$file_path/output.txt\"",
+    "selector": "source.python",
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)"
+}
+tee = T-shaped connector（像 T 形的分岔管），把輸出同時送到 console 和文件。
+
+
+3. 如何打開已有的build system修改
+Settings → Browse Packages…
+→ PythonOutputToSameFolder.sublime-build

@@ -1,11 +1,3 @@
-
-'''
-在 Python 中，物件之間如果要比較大小 (<, >, <=, >=)，就必須定義「魔術方法 (Magic Method)」。
-
-__lt__ 代表 "less than" (<)
-__gt__ 代表 "greater than" (>)
-__eq__ 代表 "equal" (==)
-'''
 import heapq
 from typing import List, Optional
 
@@ -14,24 +6,30 @@ class ListNode:
         self.val = val
         self.next = next
 
+    # 定義小於運算，讓 ListNode 可以比較
+    def __lt__(self, other):
+        return self.val < other.val
+
+
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         heap = []
-        # 初始化，把每個 list 的第一個節點放進 heap
-        for i, node in enumerate(lists):
+
+        # 初始化，把每個 list 的第一個節點丟進 heap
+        for node in lists:
             if node:
-                # (值, index, node) -> index 保證在值相同時不會比較 node 物件
-                heapq.heappush(heap, (node.val, i, node)) # 在 Python 裡，tuple 預設可以比較（會逐一比對元素）
+                heapq.heappush(heap, node)
 
         dummy = ListNode(0)
         current = dummy
 
         while heap:
-            val, i, node = heapq.heappop(heap)
+            node = heapq.heappop(heap)   # 直接得到最小的節點
             current.next = node
             current = current.next
-            if node.next:
-                heapq.heappush(heap, (node.next.val, i, node.next))
+
+            if node.next:                # 下一個節點也放進 heap
+                heapq.heappush(heap, node.next)
 
         return dummy.next
 
