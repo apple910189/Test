@@ -1,15 +1,13 @@
-from typing import List, Optional
-
 # part 2 python code
 class ListNode:
     def __init__(self, value=0, next=None):
         self.value = value
         self.next = next
     
-    def get_next(self):
+    def getNext(self):
         return self.next
     
-    def set_next(self, next_node):
+    def setNext(self, next_node):
         self.next = next_node
         
     def __lt__(self, other):
@@ -28,22 +26,17 @@ class Solution:
         head = None
         now_node = None
         
-        while len(pq) > 1:
+        while pq:
             node = heappop(pq)
+            
             if not head:
                 head = node
                 now_node = node
             else:
-                now_node.set_next(node)
-                now_node = now_node.get_next()
+                now_node.setNext(node)
+                now_node = now_node.getNext()
             
-            node = node.get_next()
-            if node:
-                heappush(pq, node)
-        if head == None:
-            if len(pq) != 0:
-                head = pq[0];
-        else:
-            now_node.setNext(heappop(pq))
+            if node.getNext():
+                heappush(pq, node.getNext())
+        
         return head
-

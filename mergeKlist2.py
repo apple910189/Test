@@ -21,20 +21,11 @@ Creating a new linked list costs O(N) space.
 '''
 
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-    # 方便印出鏈表
-    def __str__(self):
-        result = []
-        node = self
-        while node:
-            result.append(str(node.val))
-            node = node.next
-        return " -> ".join(result)
-
-
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+from typing import Optional
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         nodes = []
