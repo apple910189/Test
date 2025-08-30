@@ -1,33 +1,37 @@
-from typing import List, Optional
+import utils as u
+
 
 class ListNode:
     def __init__(self, val=0, next=None):
-        self.val=val
-        self.next=next
+        self.val = val
+        self.next = next
+        
+from typing import List, Optional
 
 class Solution:
-    def mergeKLists(self,lists:Optional[ListNode])->Optional[ListNode]:
-        values=[]
-        for node in lists:
-            while node:
-                values.append(node.val)
-                node = node.next
-
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        print(' #1 創建 values list')
+        values = []
+        for l in lists:
+            print(' #2 把 lists 中的每一個 node 的所有 node.val 都加到 values')
+            while l:
+                print(f' #3 加入node val: {l.val}')
+                values.append(l.val)
+                print(f' #4 node 往下走')
+                l = l.next
+        print(' #5 排序 values ')
+        print(' #6 創建 head 與 point, 初始值為 0')
         head = point = ListNode(0)
+        print(' #7 利用 point 與排序好的 values list 中的值, 來建立 head 的所有 node')
         for x in sorted(values):
             point.next = ListNode(x)
             point = point.next
 
         return head.next
 
+'''
 
-
-
-
-
-
-
-
+'''
 
 # ===== 輔助方法 =====
 def list_to_linkedlist(arr):
@@ -46,6 +50,7 @@ def linkedlist_to_list(node):
         result.append(node.val)
         node = node.next
     return result
+
 
 # ===== 測試 =====
 lists = [
