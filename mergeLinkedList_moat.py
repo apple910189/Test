@@ -13,19 +13,13 @@ class ListNode:
     def set_next(self, next_node):
         self.next = next_node
 
-    def go_next(self):
-        self = self.next;
-
 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         head = None
         nowNode = None
-        print_step('初始 l1 l2')
         list1Pointer = list1
         list2Pointer = list2
-        print_node('[0] list1Pointer',list1Pointer)
-        print_node('[0] list2Pointer',list2Pointer)
         if list1 is None and list2 is None: 
             print_step('Warning: Both two lists are None')
             return head 
@@ -35,61 +29,28 @@ class Solution:
         if list2 is None:
             print_step('Warning: list2 is None')
             return list1
-
-        print_run('0 (初始化 head 與 nowNode)')
+        
         if list1.value <= list2.value:
-            print_step('比較 l1 l2, 如果 l1 較小或等於, 把 l1 給 head, l1 往下走一格')
             head = list1Pointer
             list1Pointer = list1Pointer.get_next()
-            print_node('[1] list1Pointer',list1Pointer)
-            print_node('[1] head        ',head)
         else:
-            print_step('比較 l1 l2, 如果 l2 較小, 把 l2 給 head, l2 往下走一格')
             head = list2Pointer
             list2Pointer = list2Pointer.get_next()
-            print_node('[1] list2Pointer',list2Pointer)
-            print_node('[1] head        ',head)
         nowNode = head
-        print_step('把 nowNode 跟 head 設同一個地址')
-        print_node('[2] list1Pointer',list1Pointer)
-        print_node('[2] list2Pointer',list2Pointer)
-        print_node('[2] nowNode     ',nowNode)
-        print_node('[2] head        ',head)
         run = 1
         while list1Pointer is not None and list2Pointer is not None:
-            print_run(run)
             if list1Pointer.value <= list2Pointer.value:
-                print_step('比較 l1 l2, 如果 l1 較小或等於, 把 l1 給 nowNode.next, l1 往下走一格')
                 nowNode.set_next(list1Pointer)
                 list1Pointer = list1Pointer.get_next()
-                print_node('[3] list1Pointer',list1Pointer)
-                print_node('[3] list2Pointer',list2Pointer)
-                print_node('[3] nowNode     ',nowNode)
-                print_node('[3] head        ',head)
             else:
-                print_step('比較 l1 l2, 如果 l2 較小, 把 l2 給 nowNode.next, l2 往下走一格')
                 nowNode.set_next(list2Pointer)
                 list2Pointer = list2Pointer.get_next()
-                print_node('[3] list1Pointer',list1Pointer)
-                print_node('[3] list2Pointer',list2Pointer)
-                print_node('[3] nowNode     ',nowNode)
-                print_node('[3] head        ',head)
-            print_step('nowNode 往下走一格')
             nowNode = nowNode.get_next()
-            print_node('[4] list1Pointer',list1Pointer)
-            print_node('[4] list2Pointer',list2Pointer)
-            print_node('[4] nowNode     ',nowNode)
-            print_node('[4] head        ',head)
             run = run + 1
-        print_run('結束, l1 或 l2 有一個是空的')
         if list1Pointer is not None: 
-            print_step('剩下 l1, 把 l1 給 nowNode.next')
             nowNode.set_next(list1Pointer)
         else: # 如果 l2 有剩下
-            print_step('剩下 l2, 把 l2 給 nowNode.next')
             nowNode.set_next(list2Pointer)
-        print_node('[5] nowNode     ',nowNode)
-        print_node('[5] head        ',head)
         return head # 返回 head
 
 
