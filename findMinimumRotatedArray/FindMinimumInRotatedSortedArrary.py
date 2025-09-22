@@ -1,36 +1,24 @@
 def FindMinimumInRotatedSortedArrary(nums):
-	
-	# case: empty array
-	if len(nums) == 0: 
-		raise Exception("empty array")
-	
+	if len(nums) == 0:
+		raise Exception('empty array')
+
 	n = len(nums) - 1
-	# case: not rotated / one element / identical elements
-	if nums[0] <= nums[n]:
-		return nums[0]        
-	
-	left = 0
+	if nums[0]<=nums[n]:
+		return nums[0] # case: not rotated
 	right = n
-	count = 1
+	left = 0
+	
 	while right - left > 1:
-		print(f'Run {count} -------------------------')
-		middle = (left + right) // 2
-		print(f'[info] left: [{str(left)}]({nums[left]}), right: [{str(right)}]({nums[right]}), middle: [{str(middle)}]({nums[middle]})')
-		
-		# case: compare middle with the leftmost
-		# if middle >= leftmost, this means everything on the left of middle
+		middle = (right+left)//2
+		print(f'm: {middle} nums[m]:{nums[middle]}')
 		if nums[middle] > nums[0]:
-			print(f'[if  ] middle({nums[middle]}) >= nums[0]({nums[0]})')
-			print(f'[do  ] move left[{left}] to middle[{middle}]')
+			print(f'l:{left}')
 			left = middle
 		else:
-			print(f'[if  ] middle({nums[middle]}) < nums[0]({nums[left]})')
-			print(f'[do  ] move right[{right}] to middle[{middle}]')
+			print(f'r:{right}')
 			right = middle
-		print(f'[info] left: [{str(left)}]({nums[left]}), right: [{str(right)}]({nums[right]})')
-		print()
-		count = count+1
-	return nums[right];
+
+	return nums[right]
 
 def FindMinimumInRotatedSortedArraryWithDuplicateElements(nums):
 	if len(nums) == 0:  
@@ -95,15 +83,25 @@ def calculate():
 n1 = [10,11,12,13,14,1,2,3,4,5,6,7,8,9]
 n2 = [14,1,2,3,4,5,6,7,8,9,10,11,12,13]
 n3 = [2,3,4,5,6,7,8,9,10,11,12,13,14,1]
-n4 = [4,5,1,2,3]
-n5 = [2,2,3,1,2]
-n6 = []
-# result = FindMinimumInRotatedSortedArrary(n4)
-# result = FindMinimumInRotatedSortedArraryWithDuplicateElements(n5)
-result = a(n5)
-print(result)
+case1 = [3,4,5,1,2]
+case2 = [4,5,6,7,0,1,2]
+case3 = [11,13,15,17]
+res1 = FindMinimumInRotatedSortedArrary(case1)
+res2 = FindMinimumInRotatedSortedArrary(case2)
+res3 = FindMinimumInRotatedSortedArrary(case3)
 
-calculate()
+case4 = [1,3,5]
+case5 = [2,2,2,0,1]
+res4 = FindMinimumInRotatedSortedArraryWithDuplicateElements(case4)
+res5 = FindMinimumInRotatedSortedArraryWithDuplicateElements(case5)
+# result = FindMinimumInRotatedSortedArraryWithDuplicateElements(n5)
+
+print(f'case1:{res1}')
+print(f'case2:{res2}')
+print(f'case3:{res3}')
+
+print(f'case4:{res4}')
+print(f'case5:{res5}')
 
 
 
