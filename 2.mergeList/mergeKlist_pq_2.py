@@ -61,7 +61,7 @@ lists = [
 solution = Solution()
 merged = solution.mergeKLists(lists)
 
-print(linkedlist_to_list(merged))  # 預期輸出: [1,1,2,3,4,4,5,6]
+print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,6]
 
 
 

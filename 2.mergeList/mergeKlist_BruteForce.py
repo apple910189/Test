@@ -1,4 +1,8 @@
-import utils as u
+# # 將專案根目錄加到 sys.path
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+import common.utils as u
 
 
 class ListNode:

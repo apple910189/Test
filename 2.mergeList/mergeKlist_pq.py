@@ -17,23 +17,24 @@ class ListNode:
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         heap = []
-        # 初始化，把每個 list 的第一個節點放進 heap
+        # push all nodes into heap
         for i, node in enumerate(lists):
             if node:
-                # (值, index, node) -> index 保證在值相同時不會比較 node 物件
-                heapq.heappush(heap, (node.val, i, node)) # 在 Python 裡，tuple 預設可以比較（會逐一比對元素）
-
-        dummy = ListNode(0)
-        current = dummy
-
+                heapq.heappush(heap, (node.val, i, node))
+        # create head and curr
+        head = ListNode(0)
+        curr = head
         while heap:
-            val, i, node = heapq.heappop(heap)
-            current.next = node
-            current = current.next
+            # pop one node
+            val,i,node = heapq.heappop(heap)
+            # append to curr
+            curr.next = node
+            curr = curr.next
+            # if node.next exits, push node.next into heap
             if node.next:
                 heapq.heappush(heap, (node.next.val, i, node.next))
-
-        return dummy.next
+        # return head.next
+        return head.next
 
 
 # ===== 輔助方法 =====
@@ -63,4 +64,4 @@ lists = [
 solution = Solution()
 merged = solution.mergeKLists(lists)
 
-print(linkedlist_to_list(merged))  # 預期輸出: [1,1,2,3,4,4,5,6]
+print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,6]

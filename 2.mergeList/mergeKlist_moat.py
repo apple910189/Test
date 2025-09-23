@@ -1,4 +1,6 @@
 # part 2 python code
+import heapq
+from typing import List, Optional
 class ListNode:
     def __init__(self, value=0, next=None):
         self.value = value
@@ -21,13 +23,13 @@ class Solution:
         
         for node in lists:
             if node:
-                heappush(pq, node)
+                heapq.heappush(pq, node)
         
         head = None
         now_node = None
         
         while pq:
-            node = heappop(pq)
+            node = heapq.heappop(pq)
             
             if not head:
                 head = node
@@ -37,11 +39,38 @@ class Solution:
                 now_node = now_node.getNext()
             
             if node.getNext():
-                heappush(pq, node.getNext())
+                heapq.heappush(pq, node.getNext())
         
         return head
 
+# ===== 輔助方法 =====
+def list_to_linkedlist(arr):
+    dummy = ListNode(0)
+    current = dummy
+    for num in arr:
+        current.next = ListNode(num)
+        current = current.next
+    return dummy.next
 
+def linkedlist_to_list(node):
+    result = []
+    while node:
+        result.append(node.value)
+        node = node.next
+    return result
+
+
+# ===== 測試 =====
+lists = [
+    list_to_linkedlist([1,4,5]),
+    list_to_linkedlist([1,3,4]),
+    list_to_linkedlist([2,6])
+]
+
+solution = Solution()
+merged = solution.mergeKLists(lists)
+
+print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,6]
 '''
 你這段程式碼 👍 完全正確地實作了 **k 個已排序 linked list 的合併**，而且跟之前版本一樣使用了 `heapq` (最小堆)，只是這裡加了 getter / setter 方法來操作 `next`。
 

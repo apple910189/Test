@@ -15,26 +15,46 @@ class ListNode(object):
 		self.next = next_node
 
 class Solution(object):
-	def mergeTwoLists(self, l1, l2):
-		# create new and curr
-		new = ListNode(-1)
-		curr = new
-		# compare l1 and l2 and append them to curr
-		while l1 and l2:
-			if l1.val <= l2.val:
-				curr.next = l1
-				l1 = l1.next
-			else:
-				curr.next = l2
-				l2 = l2.next
-			curr = curr.next
-		# append l1 or l2 to curr if one of them are none
-		if l1 is not None:
-			curr.next = l1
-		else:
-			curr.next = l2
-		# return new.next
-		return new.next
+	def mergeTwoLists(self, list1, list2):
+		print('--- start ---')
+		if not list1 or not list2:
+			print_list('return list1',list1) if list1 else print_list('return list2',list2)
+			return list1 if list1 else list2
+		print_list('list1',list1)
+		print_list('list2',list2)
+		if list1.val > list2.val:
+			list1, list2 = list2, list1
+			print_list('list1sw',list1)
+			print_list('list2sw',list2)
+
+		list1.next = self.mergeTwoLists(list1.next, list2)
+		print_list('return list1',list1)
+		return list1
+	'''
+	l1: [1,2]
+	l2: [3,4]
+	m(1,3)
+	  |
+	m(2,3)
+	   \
+	m(n,3)
+
+	l1: [1,3,5]
+	l2: [2,4,6]
+	m(1,2)
+	  \
+	   --------\
+	m(3,2) >> m(2,3)
+				|
+	m(4,3) >> m(3,4)
+				|
+	m(5,4) >> m(4,5)
+				|
+	m(6,5) >> m(5,6)
+		-	 --/
+			/
+	m(none,6)
+	'''
 
 # ======= 工具函式 =======
 def list_to_linked(lst):
@@ -65,8 +85,8 @@ def print_address(nodeName, node: Optional[ListNode]):
 
 
 # ======= 測試 =======
-list1 = [1,2,3]
-list2 = [4,5]
+list1 = [1,3,5]
+list2 = [2,4,6]
 list3 = [5,6]
 
 l1 = list_to_linked(list1)
