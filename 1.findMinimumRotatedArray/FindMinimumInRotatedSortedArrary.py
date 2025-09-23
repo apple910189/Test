@@ -1,41 +1,51 @@
 def FindMinimumInRotatedSortedArrary(nums):
+	# case: empty array
 	if len(nums) == 0:
 		raise Exception('empty array')
-
 	n = len(nums) - 1
+	# case: not rotated
 	if nums[0]<=nums[n]:
-		return nums[0] # case: not rotated
+		return nums[0] 
+	# create right and left pointer
 	right = n
 	left = 0
-	
+	# stop while when right-left > 1
 	while right - left > 1:
 		middle = (right+left)//2
 		print(f'm: {middle} nums[m]:{nums[middle]}')
+		# if middle > first, move left, else move right
 		if nums[middle] > nums[0]:
 			print(f'l:{left}')
 			left = middle
 		else:
 			print(f'r:{right}')
 			right = middle
-
+	# return right pointer
 	return nums[right]
 
 def FindMinimumInRotatedSortedArraryWithDuplicateElements(nums):
+	# case: empty array
 	if len(nums) == 0:  
 		raise Exception("empty array")
 	n = len(nums) - 1
+	# remove last if last == first
 	while n!=0 and nums[n] == nums[0]:
 		n = n - 1
+	# case: not rotated
 	if nums[0] <= nums[n]:
 		return nums[0];
+	# crate left and right pointer
 	left = 0
 	right = n
+	# stop while when right - left > 1
 	while right - left > 1:
 		middle = (left + right) // 2
+		# if middle >= first, move left, else move right
 		if nums[middle] >= nums[0]:
 			left = middle
 		else:
 			right = middle
+	# return right pointer
 	return nums[right]
 
 def a(nums):
