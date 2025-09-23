@@ -1,4 +1,8 @@
 
+# 如果要調用utils.py，要在你的 python script 加下面兩行，因為utils.py不是class
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 def print_val(listName, node):
     """把鏈結串列轉回字串輸出"""
     vals = []
