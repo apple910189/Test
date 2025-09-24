@@ -33,11 +33,14 @@ Space complexity : O(1)
 We can merge two sorted linked lists in O(1) space.
 '''
 
+
+from typing import List, Optional
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         amount = len(lists)
@@ -67,3 +70,33 @@ class Solution:
             point.next = l1
 
         return head.next
+
+
+# ===== 輔助方法 =====
+def list_to_linkedlist(arr):
+    dummy = ListNode(0)
+    current = dummy
+    for num in arr:
+        current.next = ListNode(num)
+        current = current.next
+    return dummy.next
+
+def linkedlist_to_list(node):
+    result = []
+    while node:
+        result.append(node.val)
+        node = node.next
+    return result
+
+
+# ===== 測試 =====
+lists = [
+    list_to_linkedlist([1,4,5]),
+    list_to_linkedlist([1,3,4]),
+    list_to_linkedlist([2,6])
+]
+
+solution = Solution()
+merged = solution.mergeKLists(lists)
+
+print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,6]
