@@ -1,32 +1,32 @@
 class Solution:
-    def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
-        n = len(s)
-        if k >= n:
-            return n
-        left, right = k, n
-        
-        def isValid(size):
-            counter = collections.Counter(s[:size])
-            if len(counter) <= k:
-                return True
-            for i in range(size, n):
-                counter[s[i]] += 1
-                counter[s[i - size]] -= 1
-                if counter[s[i - size]] == 0:
-                    del counter[s[i - size]]
-                if len(counter) <= k:
-                    return True
-            return False
-        
-        while left < right:
-            mid = (left + right + 1) // 2
-            
-            if isValid(mid):
-                left = mid
-            else:
-                right = mid - 1
-        
-        return left
+	def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
+		n = len(s)
+		if k >= n:
+			return n
+		left, right = k, n
+		
+		def isValid(size):
+			counter = collections.Counter(s[:size])
+			if len(counter) <= k:
+				return True
+			for i in range(size, n):
+				counter[s[i]] += 1
+				counter[s[i - size]] -= 1
+				if counter[s[i - size]] == 0:
+					del counter[s[i - size]]
+				if len(counter) <= k:
+					return True
+			return False
+		
+		while left < right:
+			mid = (left + right + 1) // 2
+			
+			if isValid(mid):
+				left = mid
+			else:
+				right = mid - 1
+		
+		return left
 
 
 '''
@@ -39,24 +39,24 @@ class Solution:
 
 ```
 輸入 s, k
-     │
-     ▼
+	 │
+	 ▼
 n = len(s)
 如果 k >= n → 回傳 n
-     │
-     ▼
+	 │
+	 ▼
 left = k, right = n
-     │
-     ▼
+	 │
+	 ▼
 while left < right:
-    mid = (left + right + 1) // 2   ← 二分搜尋長度
-    │
-    ├─ isValid(mid) ?
-    │       │
-    │       ├─ True → left = mid
-    │       └─ False → right = mid - 1
-     │
-     ▼
+	mid = (left + right + 1) // 2   ← 二分搜尋長度
+	│
+	├─ isValid(mid) ?
+	│       │
+	│       ├─ True → left = mid
+	│       └─ False → right = mid - 1
+	 │
+	 ▼
 回傳 left
 ```
 
@@ -68,22 +68,22 @@ while left < right:
 
 ```
 輸入 size
-     │
-     ▼
+	 │
+	 ▼
 建立 counter = s[0:size] 的字元計數
-     │
-     ├─ 如果 distinct 字元數 <= k → True
-     │
-     ▼
+	 │
+	 ├─ 如果 distinct 字元數 <= k → True
+	 │
+	 ▼
 for i in range(size, n):  ← 滑動視窗
-    counter[s[i]] += 1
-    counter[s[i - size]] -= 1
-    如果 counter[s[i - size]] == 0:
-        刪除該字元
-    │
-    ├─ 如果 distinct 字元數 <= k → True
-     │
-     ▼
+	counter[s[i]] += 1
+	counter[s[i - size]] -= 1
+	如果 counter[s[i - size]] == 0:
+		刪除該字元
+	│
+	├─ 如果 distinct 字元數 <= k → True
+	 │
+	 ▼
 全部檢查完 → False
 ```
 

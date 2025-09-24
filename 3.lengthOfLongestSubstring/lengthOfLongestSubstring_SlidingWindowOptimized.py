@@ -1,20 +1,20 @@
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        n = len(s)
-        ans = 0
-        # charToNextIndex stores the index after current character
-        charToNextIndex = {}
+	def lengthOfLongestSubstring(self, s: str) -> int:
+		n = len(s)
+		ans = 0
+		# charToNextIndex stores the index after current character
+		charToNextIndex = {}
 
-        i = 0
-        # try to extend the range [i, j]
-        for j in range(n):
-            if s[j] in charToNextIndex:
-                i = max(charToNextIndex[s[j]], i)
+		i = 0
+		# try to extend the range [i, j]
+		for j in range(n):
+			if s[j] in charToNextIndex:
+				i = max(charToNextIndex[s[j]], i)
 
-            ans = max(ans, j - i + 1)
-            charToNextIndex[s[j]] = j + 1
+			ans = max(ans, j - i + 1)
+			charToNextIndex[s[j]] = j + 1
 
-        return ans
+		return ans
 
 sol = Solution()
 res = sol.lengthOfLongestSubstring('aab')
@@ -30,26 +30,26 @@ print(res)
 
 ```
 輸入字串 s
-       │
-       ▼
+	   │
+	   ▼
 初始化 n = len(s), ans = 0, charToNextIndex = {}, i = 0
-       │
-       ▼
+	   │
+	   ▼
 for j in range(n):   ←─ 掃描每個字元
-       │
-       ├─► 檢查 s[j] 是否出現在 charToNextIndex
-       │        │
-       │        ├─ 是 → i = max(charToNextIndex[s[j]], i)
-       │        └─ 否 → 不動
-       │
-       ├─ 更新當前視窗長度 ans = max(ans, j - i + 1)
-       │
-       └─ 記錄字元下次可用位置 charToNextIndex[s[j]] = j + 1
-       │
-       ▼
+	   │
+	   ├─► 檢查 s[j] 是否出現在 charToNextIndex
+	   │        │
+	   │        ├─ 是 → i = max(charToNextIndex[s[j]], i)
+	   │        └─ 否 → 不動
+	   │
+	   ├─ 更新當前視窗長度 ans = max(ans, j - i + 1)
+	   │
+	   └─ 記錄字元下次可用位置 charToNextIndex[s[j]] = j + 1
+	   │
+	   ▼
 迴圈結束
-       │
-       ▼
+	   │
+	   ▼
 回傳 ans
 ```
 

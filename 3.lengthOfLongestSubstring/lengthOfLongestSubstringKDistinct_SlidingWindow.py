@@ -1,22 +1,22 @@
 class Solution:
-    def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
-        n = len(s)
-        max_size = 0
-        counter = collections.Counter()
-        
-        left = 0
-        for right in range(n):
-            counter[s[right]] += 1
-            
-            while len(counter) > k: 
-                counter[s[left]] -= 1
-                if counter[s[left]] == 0:
-                    del counter[s[left]]
-                left += 1
-            
-            max_size = max(max_size, right - left + 1)
-                    
-        return max_size
+	def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
+		n = len(s)
+		max_size = 0
+		counter = collections.Counter()
+		
+		left = 0
+		for right in range(n):
+			counter[s[right]] += 1
+			
+			while len(counter) > k: 
+				counter[s[left]] -= 1
+				if counter[s[left]] == 0:
+					del counter[s[left]]
+				left += 1
+			
+			max_size = max(max_size, right - left + 1)
+					
+		return max_size
 
 
 '''
@@ -30,26 +30,26 @@ class Solution:
 
 ```
 輸入 s, k
-     │
-     ▼
+	 │
+	 ▼
 初始化：
 n = len(s)
 max_size = 0
 counter = {}
 left = 0
-     │
-     ▼
+	 │
+	 ▼
 for right in [0..n-1]:   ← 遍歷字串
-    counter[s[right]] += 1
-    │
-    ├─ while len(counter) > k:   ← 超過 k 種字元就縮小左邊
-    │        counter[s[left]] -= 1
-    │        如果 = 0 → 刪掉該字元
-    │        left += 1
-    │
-    └─ 更新 max_size = max(max_size, right - left + 1)
-     │
-     ▼
+	counter[s[right]] += 1
+	│
+	├─ while len(counter) > k:   ← 超過 k 種字元就縮小左邊
+	│        counter[s[left]] -= 1
+	│        如果 = 0 → 刪掉該字元
+	│        left += 1
+	│
+	└─ 更新 max_size = max(max_size, right - left + 1)
+	 │
+	 ▼
 回傳 max_size
 ```
 
@@ -118,8 +118,8 @@ max\_size = max(3, 3-2+1) = 3
 
   * 移出 `"e"` → {b:1, a:1}
   * left=3
-    視窗 = `[b a]`
-    max\_size = max(3, 4-3+1) = 3
+	視窗 = `[b a]`
+	max\_size = max(3, 4-3+1) = 3
 
 ---
 

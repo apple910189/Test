@@ -2,25 +2,25 @@ from collections import Counter
 
 
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        chars = Counter()
+	def lengthOfLongestSubstring(self, s: str) -> int:
+		chars = Counter()
 
-        left = right = 0
+		left = right = 0
 
-        res = 0
-        while right < len(s):
-            r = s[right]
-            chars[r] += 1
+		res = 0
+		while right < len(s):
+			r = s[right]
+			chars[r] += 1
 
-            while chars[r] > 1:
-                l = s[left]
-                chars[l] -= 1
-                left += 1
+			while chars[r] > 1:
+				l = s[left]
+				chars[l] -= 1
+				left += 1
 
-            res = max(res, right - left + 1)
+			res = max(res, right - left + 1)
 
-            right += 1
-        return res
+			right += 1
+		return res
 
 sol = Solution()
 res = sol.lengthOfLongestSubstring('aab')
@@ -145,8 +145,8 @@ res = max(3, 4 - 2 + 1) = 3
 
 ```
 a b [c a b] c b b
-     ↑
-    left=2
+	 ↑
+	left=2
 ```
 
 ---
@@ -171,8 +171,8 @@ res = max(3, 5 - 3 + 1) = 3
 
 ```
 a b c [a b c] b b
-       ↑
-      left=3
+	   ↑
+	  left=3
 ```
 
 ---
@@ -198,8 +198,8 @@ res = max(3, 6 - 5 + 1) = 3
 
 ```
 a b c a b [c b] b
-         ↑
-        left=5
+		 ↑
+		left=5
 ```
 
 ---
@@ -225,8 +225,8 @@ res = max(3, 7 - 7 + 1) = 3
 
 ```
 a b c a b c b [b]
-           ↑
-          left=7
+		   ↑
+		  left=7
 ```
 
 ---
