@@ -2,7 +2,7 @@ from collections import Counter
 
 
 class Solution:
-   def lengthOfLongestSubstring(self, s: str) -> int:
+	def lengthOfLongestSubstring(self, s: str) -> int:
 		left = 0
 		seen = set()
 		ans = 0

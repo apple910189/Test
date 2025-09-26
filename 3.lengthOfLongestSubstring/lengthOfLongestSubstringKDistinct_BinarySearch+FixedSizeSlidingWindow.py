@@ -1,3 +1,5 @@
+import collections
+
 class Solution:
 	def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
 		n = len(s)
@@ -28,6 +30,9 @@ class Solution:
 		
 		return left
 
+sol = Solution()
+res = sol.lengthOfLongestSubstringKDistinct('abb',2)
+print(res)
 
 '''
 好 👍 這段程式是 **Longest Substring with At Most K Distinct Characters** 的 **二分搜尋 + 滑動視窗檢查** 解法。

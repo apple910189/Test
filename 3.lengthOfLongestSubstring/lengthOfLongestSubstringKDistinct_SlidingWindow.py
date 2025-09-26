@@ -1,3 +1,5 @@
+import collections
+
 class Solution:
 	def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
 		n = len(s)
@@ -18,6 +20,9 @@ class Solution:
 					
 		return max_size
 
+sol = Solution()
+res = sol.lengthOfLongestSubstringKDistinct('abb',2)
+print(res)
 
 '''
 好 👌 這個版本是用 **雙指標滑動視窗 (two pointers + sliding window)** 來解 `Longest Substring with At Most K Distinct Characters`，比起你剛剛的 **二分搜尋版本**更直觀。
@@ -69,7 +74,7 @@ s = "eceba", k = 2
 
 * left = 0, right = 0, counter = {e:1}
 * distinct = 1 ≤ k
-* max\_size = max(0, 0-0+1) = 1
+* max/_size = max(0, 0-0+1) = 1
   視窗 = `[e]`
 
 ---
@@ -79,7 +84,7 @@ s = "eceba", k = 2
 * right = 1 → 加入 `"c"`
 * counter = {e:1, c:1}
 * distinct = 2 ≤ k
-* max\_size = max(1, 1-0+1) = 2
+* max/_size = max(1, 1-0+1) = 2
   視窗 = `[e c]`
 
 ---
@@ -89,7 +94,7 @@ s = "eceba", k = 2
 * right = 2 → 加入 `"e"`
 * counter = {e:2, c:1}
 * distinct = 2 ≤ k
-* max\_size = max(2, 2-0+1) = 3
+* max/_size = max(2, 2-0+1) = 3
   視窗 = `[e c e]` ✅ 最長
 
 ---
@@ -106,7 +111,7 @@ left=1 → 移出 `"c"`
 counter = {e:1, b:1} (2 個) ✅
 
 現在 left=2, 視窗 = `[e b]`
-max\_size = max(3, 3-2+1) = 3
+max/_size = max(3, 3-2+1) = 3
 
 ---
 
@@ -119,7 +124,7 @@ max\_size = max(3, 3-2+1) = 3
   * 移出 `"e"` → {b:1, a:1}
   * left=3
 	視窗 = `[b a]`
-	max\_size = max(3, 4-3+1) = 3
+	max/_size = max(3, 4-3+1) = 3
 
 ---
 
@@ -138,6 +143,6 @@ max_size → 紀錄目前最大合法視窗
 
 ---
 
-要不要我幫你畫成 **一條字串上動態移動 \[left, right] 視窗的圖**（像動畫時間線那樣），讓你直覺看到 `eceba` 的視窗如何移動？
+要不要我幫你畫成 **一條字串上動態移動 /[left, right] 視窗的圖**（像動畫時間線那樣），讓你直覺看到 `eceba` 的視窗如何移動？
 
 '''
