@@ -1,5 +1,5 @@
 class Solution:
-	def lengthOfLongestSubstring(self, s: str) -> int:
+	def lengthOfLongestSubstring_1(self, s: str) -> int:
 		left = 0
 		right = 0
 		cnt = [0] * 128  # ASCII table size
@@ -23,7 +23,22 @@ class Solution:
 			window = s[left:right]
 			print(f"<增> left={left}, right={right}, window='{window}', ans={ans}")
 			print()
+		return ans
 
+	def lengthOfLongestSubstring(self, s: str) -> int:
+		left = 0
+		right = 0
+		cnt = [0] * 128  # ASCII table size
+		ans = 0
+
+		while right < len(s):
+			while cnt[ord(s[right])] > 0:
+				# 如果s right>0 表示有重複，要讓left指到重複的地方，減一
+				cnt[ord(s[left])] -= 1
+				left += 1
+			cnt[ord(s[right])] += 1
+			ans = max(ans, right - left + 1)
+			right += 1
 		return ans
 
 def printCnt(cnt):
