@@ -18,3 +18,9 @@ tee = T-shaped connector（像 T 形的分岔管），把輸出同時送到 cons
 3. 如何打開已有的build system修改
 Settings → Browse Packages…
 → PythonOutputToSameFolder.sublime-build
+
+4. 設定indentation using spaces as default
+
+    "translate_tabs_to_spaces": true,
+    "tab_size": 4,
+    "detect_indentation": false
