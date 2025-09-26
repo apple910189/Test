@@ -3,23 +3,23 @@ from collections import Counter
 
 class Solution:
    def lengthOfLongestSubstring(self, s: str) -> int:
-	  left = 0
-	  right = 0
-	  cnt = [False for _ in range(26)]
-	  print(cnt)
-	  ans = 0
-	  while right < len(s):
-		 while cnt[ord(s[right]) - ord('a')]:
-			cnt[ord(s[left]) - ord('a')] = False
-			left = left + 1
-			# print(f'+ left:{left}')
-		 cnt[ord(s[right]) - ord('a')] = True 
+      left = 0
+      right = 0
+      cnt = [False for _ in range(26)]
+      print(cnt)
+      ans = 0
+      while right < len(s):
+         while cnt[ord(s[right]) - ord('a')]:
+            cnt[ord(s[left]) - ord('a')] = False
+            left = left + 1
+            # print(f'+ left:{left}')
+         cnt[ord(s[right]) - ord('a')] = True 
 
-		 if right - left + 1 > ans:
-			ans = right - left + 1
-		 # print(f'right:{right} left:{left} ans:{ans}')
-		 right = right + 1
-	  return ans
+         if right - left + 1 > ans:
+            ans = right - left + 1
+         # print(f'right:{right} left:{left} ans:{ans}')
+         right = right + 1
+      return ans
 
 sol = Solution()
 res = sol.lengthOfLongestSubstring('abcabcbb')
@@ -144,7 +144,7 @@ res = max(3, 4 - 2 + 1) = 3
 
 ```
 a b [c a b] c b b
-	↑
+    ↑
    left=2
 ```
 
@@ -170,8 +170,8 @@ res = max(3, 5 - 3 + 1) = 3
 
 ```
 a b c [a b c] b b
-	  ↑
-	 left=3
+      ↑
+     left=3
 ```
 
 ---
@@ -197,8 +197,8 @@ res = max(3, 6 - 5 + 1) = 3
 
 ```
 a b c a b [c b] b
-	   ↑
-	  left=5
+       ↑
+      left=5
 ```
 
 ---
@@ -224,8 +224,8 @@ res = max(3, 7 - 7 + 1) = 3
 
 ```
 a b c a b c b [b]
-		 ↑
-		left=7
+         ↑
+        left=7
 ```
 
 ---

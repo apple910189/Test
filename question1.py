@@ -5,30 +5,30 @@
 
 
 class ListNode:
-	def __init__(self, val=0, next=None):
-		self.val = val
-		self.next = next
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 def print_node(nodeName, node):
-	# print_val(nodeName,node)
-	# print_address(nodeName,node)
-	print_valAndAddress(nodeName,node)
+    # print_val(nodeName,node)
+    # print_address(nodeName,node)
+    print_valAndAddress(nodeName,node)
 
 def print_valAndAddress(nodeName, node):
-	nodeAddress = []
-	nodevals = []
-	while node:
-		nodeAddress.append(str(hex(id(node)))[5:11])
-		nodevals.append(str(node.val))
-		node = node.next
-	newList = []
-	for i in range(len(nodeAddress)):
-		str1 = f'({nodevals[i]}) {nodeAddress[i]}'
-		newList.append(str1)
-	print(f'{nodeName}: {" -> ".join(newList)}')
+    nodeAddress = []
+    nodevals = []
+    while node:
+        nodeAddress.append(str(hex(id(node)))[5:11])
+        nodevals.append(str(node.val))
+        node = node.next
+    newList = []
+    for i in range(len(nodeAddress)):
+        str1 = f'({nodevals[i]}) {nodeAddress[i]}'
+        newList.append(str1)
+    print(f'{nodeName}: {" -> ".join(newList)}')
 
 def print_step(string):
-	print(f' ---------------- {string}')
+    print(f' ---------------- {string}')
 
 dummy = ListNode(0)
 current = dummy

@@ -2,69 +2,69 @@
 import heapq
 from typing import List, Optional
 class ListNode:
-	def __init__(self, value=0, next=None):
-		self.value = value
-		self.next = next
-	
-	def getNext(self):
-		return self.next
-	
-	def setNext(self, next_node):
-		self.next = next_node
-		
-	def __lt__(self, other):
-	  return self.value < other.value
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next
+    
+    def getNext(self):
+        return self.next
+    
+    def setNext(self, next_node):
+        self.next = next_node
+        
+    def __lt__(self, other):
+      return self.value < other.value
 
 class Solution:
-	def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-		pq = []
-		if not lists:
-			return None
-		
-		for node in lists:
-			if node:
-				heapq.heappush(pq, node)
-		
-		head = None
-		now_node = None
-		
-		while pq:
-			node = heapq.heappop(pq)
-			
-			if not head:
-				head = node
-				now_node = node
-			else:
-				now_node.setNext(node)
-				now_node = now_node.getNext()
-			
-			if node.getNext():
-				heapq.heappush(pq, node.getNext())
-		
-		return head
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        pq = []
+        if not lists:
+            return None
+        
+        for node in lists:
+            if node:
+                heapq.heappush(pq, node)
+        
+        head = None
+        now_node = None
+        
+        while pq:
+            node = heapq.heappop(pq)
+            
+            if not head:
+                head = node
+                now_node = node
+            else:
+                now_node.setNext(node)
+                now_node = now_node.getNext()
+            
+            if node.getNext():
+                heapq.heappush(pq, node.getNext())
+        
+        return head
 
 # ===== 輔助方法 =====
 def list_to_linkedlist(arr):
-	dummy = ListNode(0)
-	current = dummy
-	for num in arr:
-		current.next = ListNode(num)
-		current = current.next
-	return dummy.next
+    dummy = ListNode(0)
+    current = dummy
+    for num in arr:
+        current.next = ListNode(num)
+        current = current.next
+    return dummy.next
 
 def linkedlist_to_list(node):
-	result = []
-	while node:
-		result.append(node.value)
-		node = node.next
-	return result
+    result = []
+    while node:
+        result.append(node.value)
+        node = node.next
+    return result
 
 
 # ===== 測試 =====
 lists = [
-	list_to_linkedlist([1,4,5]),
-	list_to_linkedlist([1,3,4]),
-	list_to_linkedlist([2,6])
+    list_to_linkedlist([1,4,5]),
+    list_to_linkedlist([1,3,4]),
+    list_to_linkedlist([2,6])
 ]
 
 solution = Solution()
@@ -84,18 +84,18 @@ print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,
 
    ```python
    class ListNode:
-	   def __init__(self, value=0, next=None):
-		   self.value = value
-		   self.next = next
-	   
-	   def getNext(self):
-		   return self.next
-	   
-	   def setNext(self, next_node):
-		   self.next = next_node
-	   
-	   def __lt__(self, other):
-		   return self.value < other.value
+       def __init__(self, value=0, next=None):
+           self.value = value
+           self.next = next
+       
+       def getNext(self):
+           return self.next
+       
+       def setNext(self, next_node):
+           self.next = next_node
+       
+       def __lt__(self, other):
+           return self.value < other.value
    ```
 
    * `__lt__` (`<`) 運算子 overloading 讓 `heapq` 可以比較 `ListNode`，根據 `value` 排序。
@@ -108,8 +108,8 @@ print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,
    ```python
    pq = []
    for node in lists:
-	   if node:
-		   heappush(pq, node)
+       if node:
+           heappush(pq, node)
    ```
 
    * 把每個 linked list 的第一個節點放進最小堆。
@@ -133,17 +133,17 @@ print(f'結果：{linkedlist_to_list(merged)}')  # 預期輸出: [1,1,2,3,4,4,5,
 
    ```python
    while pq:
-	   node = heappop(pq)
-	   
-	   if not head:
-		   head = node
-		   now_node = node
-	   else:
-		   now_node.setNext(node)
-		   now_node = now_node.getNext()
-	   
-	   if node.getNext():
-		   heappush(pq, node.getNext())
+       node = heappop(pq)
+       
+       if not head:
+           head = node
+           now_node = node
+       else:
+           now_node.setNext(node)
+           now_node = now_node.getNext()
+       
+       if node.getNext():
+           heappush(pq, node.getNext())
    ```
 
    * 從堆中取出最小節點。

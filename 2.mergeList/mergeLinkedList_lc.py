@@ -4,64 +4,64 @@ from typing import Optional
 
 # Definition for singly-linked list.
 class ListNode(object):
-	def __init__(self, val=0, next=None):
-		self.val = val
-		self.next = next
-	
-	def get_next(self):
-		return self.next
-	
-	def set_next(self, next_node):
-		self.next = next_node
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    
+    def get_next(self):
+        return self.next
+    
+    def set_next(self, next_node):
+        self.next = next_node
 
 class Solution(object):
-	def mergeTwoLists(self, l1, l2):
-		# create new and curr
-		new = ListNode(-1)
-		curr = new
-		# compare l1 and l2 and append them to curr
-		while l1 and l2:
-			if l1.val <= l2.val:
-				curr.next = l1
-				l1 = l1.next
-			else:
-				curr.next = l2
-				l2 = l2.next
-			curr = curr.next
-		# append l1 or l2 to curr if one of them are none
-		if l1 is not None:
-			curr.next = l1
-		else:
-			curr.next = l2
-		# return new.next
-		return new.next
+    def mergeTwoLists(self, l1, l2):
+        # create new and curr
+        new = ListNode(-1)
+        curr = new
+        # compare l1 and l2 and append them to curr
+        while l1 and l2:
+            if l1.val <= l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next
+            curr = curr.next
+        # append l1 or l2 to curr if one of them are none
+        if l1 is not None:
+            curr.next = l1
+        else:
+            curr.next = l2
+        # return new.next
+        return new.next
 
 # ======= 工具函式 =======
 def list_to_linked(lst):
-	if not lst:
-		return None
-	head = ListNode(lst[0])
-	curr = head
-	print(lst[1:])
-	for v in lst[1:]:
-		curr.next = ListNode(v)
-		curr = curr.next
-	return head
+    if not lst:
+        return None
+    head = ListNode(lst[0])
+    curr = head
+    print(lst[1:])
+    for v in lst[1:]:
+        curr.next = ListNode(v)
+        curr = curr.next
+    return head
 
 def print_list(listName, node: Optional[ListNode]):
-	"""把鏈結串列轉回字串輸出"""
-	values = []
-	while node:
-		values.append(str(node.val))
-		node = node.get_next()
-	print(f'{listName}: {" -> ".join(values)}')
+    """把鏈結串列轉回字串輸出"""
+    values = []
+    while node:
+        values.append(str(node.val))
+        node = node.get_next()
+    print(f'{listName}: {" -> ".join(values)}')
 
 def print_address(nodeName, node: Optional[ListNode]):
-	values = []
-	while node:
-		values.append(str(hex(id(node)))[5:10])
-		node = node.next
-	print(f'{nodeName}: {" -> ".join(values)}')
+    values = []
+    while node:
+        values.append(str(hex(id(node)))[5:10])
+        node = node.next
+    print(f'{nodeName}: {" -> ".join(values)}')
 
 
 # ======= 測試 =======

@@ -1,21 +1,21 @@
 import collections
 
 class Solution:
-	def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
-		max_size = 0
-		counter = collections.Counter()
-		
-		for right in range(len(s)):
-			counter[s[right]] += 1
-			
-			if len(counter) <= k:
-				max_size += 1
-			else:
-				counter[s[right - max_size]] -= 1
-				if counter[s[right - max_size]] == 0:
-					del counter[s[right - max_size]]
+    def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
+        max_size = 0
+        counter = collections.Counter()
+        
+        for right in range(len(s)):
+            counter[s[right]] += 1
+            
+            if len(counter) <= k:
+                max_size += 1
+            else:
+                counter[s[right - max_size]] -= 1
+                if counter[s[right - max_size]] == 0:
+                    del counter[s[right - max_size]]
 
-		return max_size
+        return max_size
 
 sol = Solution()
 res = sol.lengthOfLongestSubstringKDistinct('abb',2)
@@ -35,24 +35,24 @@ print(res)
 
 ```
 輸入 s, k
-	 │
-	 ▼
+     │
+     ▼
 max_size = 0
 counter = {}
-	 │
-	 ▼
+     │
+     ▼
 for right in range(len(s)):
-	counter[s[right]] += 1
-	│
-	├─ 如果 distinct 字元數 ≤ k:
-	│        max_size += 1    ← 視窗往右擴大
-	│
-	└─ 否則 (distinct > k):
-			 移除左邊界字元 s[right - max_size]
-			 如果該字元數量=0 → 刪掉
-			 （視窗縮小一格）
-	 │
-	 ▼
+    counter[s[right]] += 1
+    │
+    ├─ 如果 distinct 字元數 ≤ k:
+    │        max_size += 1    ← 視窗往右擴大
+    │
+    └─ 否則 (distinct > k):
+             移除左邊界字元 s[right - max_size]
+             如果該字元數量=0 → 刪掉
+             （視窗縮小一格）
+     │
+     ▼
 回傳 max_size
 ```
 

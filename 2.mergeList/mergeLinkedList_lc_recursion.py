@@ -4,84 +4,84 @@ from typing import Optional
 
 # Definition for singly-linked list.
 class ListNode(object):
-	def __init__(self, val=0, next=None):
-		self.val = val
-		self.next = next
-	
-	def get_next(self):
-		return self.next
-	
-	def set_next(self, next_node):
-		self.next = next_node
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    
+    def get_next(self):
+        return self.next
+    
+    def set_next(self, next_node):
+        self.next = next_node
 
 class Solution(object):
-	def mergeTwoLists(self, list1, list2):
-		print('--- start ---')
-		if not list1 or not list2:
-			print_list('return list1',list1) if list1 else print_list('return list2',list2)
-			return list1 if list1 else list2
-		print_list('list1',list1)
-		print_list('list2',list2)
-		if list1.val > list2.val:
-			list1, list2 = list2, list1
-			print_list('list1sw',list1)
-			print_list('list2sw',list2)
+    def mergeTwoLists(self, list1, list2):
+        print('--- start ---')
+        if not list1 or not list2:
+            print_list('return list1',list1) if list1 else print_list('return list2',list2)
+            return list1 if list1 else list2
+        print_list('list1',list1)
+        print_list('list2',list2)
+        if list1.val > list2.val:
+            list1, list2 = list2, list1
+            print_list('list1sw',list1)
+            print_list('list2sw',list2)
 
-		list1.next = self.mergeTwoLists(list1.next, list2)
-		print_list('return list1',list1)
-		return list1
-	'''
-	l1: [1,2]
-	l2: [3,4]
-	m(1,3)
-	  |
-	m(2,3)
-	   \
-	m(n,3)
+        list1.next = self.mergeTwoLists(list1.next, list2)
+        print_list('return list1',list1)
+        return list1
+    '''
+    l1: [1,2]
+    l2: [3,4]
+    m(1,3)
+      |
+    m(2,3)
+       \
+    m(n,3)
 
-	l1: [1,3,5]
-	l2: [2,4,6]
-	m(1,2)
-	  \
-	   --------\
-	m(3,2) >> m(2,3)
-				|
-	m(4,3) >> m(3,4)
-				|
-	m(5,4) >> m(4,5)
-				|
-	m(6,5) >> m(5,6)
-		-	 --/
-			/
-	m(none,6)
-	'''
+    l1: [1,3,5]
+    l2: [2,4,6]
+    m(1,2)
+      \
+       --------\
+    m(3,2) >> m(2,3)
+                |
+    m(4,3) >> m(3,4)
+                |
+    m(5,4) >> m(4,5)
+                |
+    m(6,5) >> m(5,6)
+        -	 --/
+            /
+    m(none,6)
+    '''
 
 # ======= 工具函式 =======
 def list_to_linked(lst):
-	if not lst:
-		return None
-	head = ListNode(lst[0])
-	curr = head
-	print(lst[1:])
-	for v in lst[1:]:
-		curr.next = ListNode(v)
-		curr = curr.next
-	return head
+    if not lst:
+        return None
+    head = ListNode(lst[0])
+    curr = head
+    print(lst[1:])
+    for v in lst[1:]:
+        curr.next = ListNode(v)
+        curr = curr.next
+    return head
 
 def print_list(listName, node: Optional[ListNode]):
-	"""把鏈結串列轉回字串輸出"""
-	values = []
-	while node:
-		values.append(str(node.val))
-		node = node.get_next()
-	print(f'{listName}: {" -> ".join(values)}')
+    """把鏈結串列轉回字串輸出"""
+    values = []
+    while node:
+        values.append(str(node.val))
+        node = node.get_next()
+    print(f'{listName}: {" -> ".join(values)}')
 
 def print_address(nodeName, node: Optional[ListNode]):
-	values = []
-	while node:
-		values.append(str(hex(id(node)))[5:10])
-		node = node.next
-	print(f'{nodeName}: {" -> ".join(values)}')
+    values = []
+    while node:
+        values.append(str(hex(id(node)))[5:10])
+        node = node.next
+    print(f'{nodeName}: {" -> ".join(values)}')
 
 
 # ======= 測試 =======
