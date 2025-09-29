@@ -19,6 +19,6 @@ class Solution(object):
             return False
 
 s = Solution()
-text = "{}[]"
+text = "{]"
 ans = s.isValid(text)
 print(ans)

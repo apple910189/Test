@@ -1,8 +1,8 @@
 class Solution(object):
     def isValid(self, s):
         stack = []
-        openBrackets = '([{'
-        closeBrackets = '}])'
+        openBrackets = "({["
+        closeBrackets = ")}]";
         for c in s:
             if c in openBrackets:
                 stack.append(c)
@@ -17,7 +17,8 @@ class Solution(object):
             return True
         else:
             return False
+
 s = Solution()
-text = "{()"
+text = "())"
 ans = s.isValid(text)
 print(ans)
