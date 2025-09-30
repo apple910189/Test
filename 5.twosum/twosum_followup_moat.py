@@ -8,7 +8,6 @@ class Solution:
             if target - nums[i] in hashMap:
                 list = []
                 targetList = hashMap.get(target - nums[i])
-                print(targetList)
                 list.append(targetList[-1])
                 list.append(i)
                 ans.append(list)
@@ -22,7 +21,7 @@ class Solution:
         return ans
 
 s = Solution()
-nums = [1,2,3,4,5,6,7]
-target = 7
+nums = [1,2,2,7]
+target = 9
 ans = s.twoIntegerSumTarget(nums,target)
 print(ans)
