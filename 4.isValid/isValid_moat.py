@@ -22,3 +22,20 @@ s = Solution()
 text = "{]"
 ans = s.isValid(text)
 print(ans)
+
+'''
+建立stack
+把每個字讀進來
+開兩個string，一個紀錄開的，一個紀錄關的，順序一樣
+如果是open，就push
+如果是close，先檢查if stack[-1] == openBrackets[i]，不等於就return false
+最後檢查stack長度，如果>0就return false else return true
+
+test case:
+""
+'()'
+'[]'
+'{}'
+'('
+')'
+'''
