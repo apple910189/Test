@@ -1,0 +1,1 @@
+請列出盡量多對index，任兩對的index不重複，且每對index所對應到的數字總和為target

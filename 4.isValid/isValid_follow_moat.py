@@ -45,7 +45,7 @@ class Solution(object):
         return ans
 
 s = Solution()
-text = '([}]'
+text = ')]}('
 ans = s.convertTovalidString(text)
 print(ans)
 
