@@ -8,6 +8,8 @@ stack = ['A']        # 從 A 出發
 visited = set()      # 記錄已經訪問過的節點
 order = []           # 存放訪問順序
 
+
+
 while stack:
     print(f'stack:{stack}')
     node = stack.pop()        # 從 stack 取出最後加入的節點（後進先出）
