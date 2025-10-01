@@ -1,23 +1,27 @@
-graph = {
-    'A': ['B'],
-    'B': ['A', 'C'],
-    'C': ['B']
-}
+from typing import List
+from collections import defaultdict
 
-stack = ['A']        # 從 A 出發
-visited = set()      # 記錄已經訪問過的節點
-order = []           # 存放訪問順序
+class Solution:
+    def twoIntegerSumTarget(self, nums:List[int], target:int) -> List[List[int]]:
 
-while stack:
-    print(f'stack:{stack}')
-    node = stack.pop()        # 從 stack 取出最後加入的節點（後進先出）
-    if node not in visited:   # 如果還沒訪問過
-        visited.add(node)     
-        order.append(node)
-        # 把沒訪問過的鄰居加入 stack
-        for neighbor in graph[node]:
-            if neighbor not in visited:
-                print(f'push neighbor to stack:{neighbor}')
-                stack.append(neighbor)
 
-print("DFS 訪問順序:", order)
+
+
+'''
+nums = [1,2,2,7]
+target = 9
+
+ans = []
+map={}
+traverse s
+    check diff = target - num[i] in map?
+    if not:
+        add num[i](map key) into map with i as index(map value)
+        map[num: list[index1,index2, ...]]
+    if yes:
+        get first or last diff's value, which is index, from map, with i, store in ans(ans[i, diff's value])
+        if not map[diff], del map[diff]
+return ans
+
+
+'''
