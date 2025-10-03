@@ -1,43 +1,43 @@
-from typing import List
-from collections import defaultdict
+
 
 class Solution:
-    def twoSum(self, nums:List[int], target:int) -> List[List[int]]:
-        ans = []
-        hashmap = defaultdict(list)
-        for i, num in enumerate(nums):
-            diff = target - nums[i]
-            if hashmap[diff]:
-                j = hashmap[diff].pop()
-                ans = [j,i]
-            else:
-                hashmap[nums[i]].append(i)
-        return ans
+    def numIslandsDFS(self,grid):
+        if not grid:
+            return 0
+        rows, cols = len(grid), len(grid[0])
+        def dfs(r, c):
+            if r < 0 or r >= rows or c < 0 or c <= cols or grid[r][c] == '0':
+                return
+            grid[r][c] = '0'
+            dfs(r+1, c)
+            dfs(r-1, c)
+            dfs(r, c+1)
+            dfs(r, c-1)
+        count = 0
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    dfs(r, c)
+                    count += 1
+        return count
 
+
+grid2 = [
+  ["1","1","1","1"],
+  ["1","1","1","1"],
+  ["1","1","1","1"],
+  ["1","1","1","1"]
+]
+
+grid1 = [
+  ["1","1"],
+  ["1","1"]
+]
+grid = [
+  ["1","0","0"],
+  ["0","0","1"],
+  ["0","0","1"],
+]
 
 s = Solution()
-nums = [1, 2, 2,3,4,5]
-target = 9
-print(s.threeSum(nums, target))  # [[0, 3], [1, 2]]
-
-
-
-
-'''
-nums = [1,2,2,7]
-target = 9
-
-ans = []
-map={}
-traverse s
-    check diff = target - num[i] in map?
-    if not:
-        add num[i](map key) into map with i as index(map value)
-        map[num: list[index1,index2, ...]]
-    if yes:
-        get first or last diff's value, which is index, from map, with i, store in ans(ans[i, diff's value])
-        if not map[diff], del map[diff]
-return ans
-
-
-'''
+print(s.numIslandsDFS(grid))
