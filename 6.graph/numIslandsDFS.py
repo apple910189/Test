@@ -1,25 +1,30 @@
-from typing import List
+
 
 class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
+    def numIslandsDFS(self,grid):
         if not grid:
             return 0
         rows, cols = len(grid), len(grid[0])
-        def dfs(r, c):
+
+        def dfs(r, c, step=''):
+            print(f'step:{step} r: {r} c: {c}')
             if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
+                print(f' return')
                 return
-            grid[r][c] = '0'  # 標記已訪問
-            dfs(r+1, c)
-            dfs(r-1, c)
-            dfs(r, c+1)
-            dfs(r, c-1)
+            grid[r][c] = '0'
+            dfs(r+1, c, 'r+1')  # 1,0 2,0
+            dfs(r-1, c, 'r-1')
+            dfs(r, c+1, 'c+1')
+            dfs(r, c-1, 'c-1')
         count = 0
         for r in range(rows):
             for c in range(cols):
                 if grid[r][c] == '1':
                     dfs(r, c)
                     count += 1
+                    print(f'count: {count}')
         return count
+
 
 grid2 = [
   ["1","1","1","1"],
@@ -32,16 +37,35 @@ grid1 = [
   ["1","1"],
   ["1","1"]
 ]
+grid3 = [
+  ["1"],
+  ["1"],
+]
 grid = [
   ["1","0","0"],
   ["0","0","1"],
   ["0","0","1"],
 ]
 
-grid3 = []
 s = Solution()
-print(s.numIslands(grid))
+print(s.numIslandsDFS(grid3))
 
+
+
+
+'''
+r=0,c=0
+g[0,0]=1
+g[0,0]=0
+
+r=1,c=0
+g[1,0]=1
+g[1,0]=0
+
+r=2,c=0
+return
+
+'''
 
 
 
