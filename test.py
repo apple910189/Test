@@ -1,81 +1,70 @@
+class UnionFind:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.rank = [1] * n  # 每個集合的樹高 (rank)
 
+    def find(self, a):
+        # 路徑壓縮
+        if self.parent[a] != a:
+            self.parent[a] = self.find(self.parent[a])
+        return self.parent[a]
 
-class Solution:
-    def __init__(self):
-        self.count = 0
+    def union(self, x, y):
+        px = self.find(x)
+        py = self.find(y)
+        print(f'\nunion {x} {y}, [px py] {px} {py}, rank[px py]:{self.rank[px]} {self.rank[py]} ')
+        if px == py:
+            return  # 已經在同一集合
 
-    def numIslandsDFS(self,grid):
-        if not grid:
-            return 0
-        rows, cols = len(grid), len(grid[0])
+        # 按 rank 合併，保持樹盡量矮
+        if self.rank[px] < self.rank[py]:
+            print(f'rank[px] < [py], parent[px] = py')
+            self.parent[px] = py
+        elif self.rank[px] > self.rank[py]:
+            print(f'rank[px] > [py], parent[py] = px')
+            self.parent[py] = px
+        else:
+            # 高度相同時，隨便選一個當父節點，並把 rank +1
+            self.parent[py] = px
+            self.rank[px] += 1
+        print("parent:", self.parent)
+        print("rank:", self.rank)
 
-        def dfs(r, c, step=''):
-            self.count+=1
-            print(f'count {self.count} step:{step} r: {r} c: {c}')
-            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
-                print(f' return')
-                return
-            grid[r][c] = '0'
-            dfs(r+1, c, 'r+1')  # 1,0 2,0
-            dfs(r-1, c, 'r-1')
-            dfs(r, c+1, 'c+1')
-            dfs(r, c-1, 'c-1')
-        count = 0
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == '1':
-                    dfs(r, c)
-                    count += 1
-        return count
+    def connected(self, x, y):
+        # 判斷是否在同一集合
+        return self.find(x) == self.find(y)
 
-
-grid2 = [
-  ["1","1","1","1"],
-  ["1","1","1","1"],
-  ["1","1","1","1"],
-  ["1","1","1","1"]
-]
-
-grid1 = [
-  ["1","1"],
-  ["1","1"]
-]
-grid3 = [
-  ["1"],
-  ["1"],
-]
-grid = [
-  ["1","0","0"],
-  ["0","0","1"],
-  ["0","0","1"],
-]
-
-s = Solution()
-print(s.numIslandsDFS(grid3))
-
-
-
-
+uf = UnionFind(5)
+uf.union(0,1)
 '''
-r=0,c=0
-g[0,0]=1
-g[0,0]=0
+x=0,y=1
+px=0,py=1
+rank[0]=1,rank[1]=1
+parent[1]=0
+rank[0]+1
+parent = [0,0,2,3,4]
+rank = [2,1,1,1,1]
+'''
 
-r=1,c=0
-g[1,0]=1
-g[1,0]=0
-
-r=2,c=0
-return
+uf.union(2,3)
+'''
+x=2,y=3
+px=2,px=3
+rank[2]=1,rank[3]=1
+parent[3]=2
+rank[2]+=1
+parent = [0,0,2,2,4]
+rank = [2,1,2,1,1]
 
 '''
 
-
-
-
-
-
-
-
-
-
+uf.union(1,2)
+'''
+x=1,x=2
+px=0,py=2
+rank[px]=2,rank[py]=2
+parent[py=2] = px=0
+rank[px=0] += 1
+parent=[0,0,0,2,4]
+rank = [3,1,2,1,1]
+'''

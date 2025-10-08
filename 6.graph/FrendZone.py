@@ -33,6 +33,7 @@ class UnionFind:
         self.count -= 1
         print("parent:", self.parent)
         print("rank:", self.rank)
+        print(f'count:{self.count}')
 
     def connected(self, x, y):
         # 判斷是否在同一集合
@@ -41,73 +42,17 @@ class UnionFind:
 
 uf = UnionFind(5)
 
-uf.union(0, 1)
-'''
-px = 0, py = 1
-rank[px] = 1, rank[py] = 1
-parent[py] = px, rank[px] += 1
-parent = [0,0,2,3,4]
-rank = [2,1,1,1,1]
+friends = [
+    [1,1,0,0,0],
+    [1,1,1,0,0],
+    [0,1,1,0,0],
+    [0,0,0,1,1],
+    [0,0,0,1,1]
+]
 
-A(0)
-└── B(1)
-
-'''
-
-uf.union(2, 3)
-'''
-px = 2, py = 3
-rank[px] = 1, rank[py] = 1
-parent[py] = px, rank[px] += 1
-parent = [0,0,2,2,4]
-rank = [2,1,2,1,1]
-
-A(0)
-└── B(1)
-
-C(2)
-└── D(3)
-
-E(4)
-
-'''
-
-uf.union(1, 2)
-'''
-px=0, py=2
-rank[px]=2, rank[py]=2
-parent[py]=px, rank[px]+=1
-parent = [0,0,0,2,4]
-rank = [3,1,2,1,1]
+for i in range(len(friends)):
+    for j in range(len(friends[0])):
+        if friends[i][j]==1:
+            uf.union(i,j)
 
 
-A(0)
-├── B(1)
-└── C(2)
-     └── D(3)
-
-E(4)
-
-'''
-
-uf.find(3)
-print("\nparent:", uf.parent)
-'''
-find(3)
-parent[3] <= 0 <= find(parnet[3])
-parent[3]=2, x=3
-parent[2] <= 0 <= find(parnet[2])
-parent[2]=0,x=0
-parent[0] <= 0 <= find(parent[0])
-parent[0]=0,x=0, return parent[0]->0
-
-A(0)
-├── B(1)
-├── C(2)
-└── D(3)
-
-E(4)
-
-'''
-
-uf.union(1, 4)
