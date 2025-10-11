@@ -1,57 +1,31 @@
+from collections import deque
+from typing import List
+class Solution():
+    def minimumObstacles(self, grid: List[List[int]]) -> int:
 
-dp = [0, 0, 0, 0, 0, 0]
-dp[0] = 1   # 湊出0元的方法只有一種：不選任何硬幣
-amount = 5
-coins = [1, 2, 5]
+        m, n = len(grid), len(grid[0])
+        dist = [[float('inf')] * n for _ in range(m)]
+        dist[0][0] = 0
+        dq = deque([(0, 0)])
 
+        while dq:
+            x, y = dq.popleft()
+            for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
+                nx, ny = x+dx, y+dy
+                # print(f'xy {x}{y}, dxy {dx} {dy}, nxy {nx} {ny}')
+                if 0 <= nx < m and 0 <= ny < n:
+                    cost = dist[x][y] + grid[nx][ny]
+                    if cost < dist[nx][ny]:
+                        print(f'sam1 {cost}')
+                        dist[nx][ny] = cost
+                        if grid[nx][ny] == 0:
+                            dq.appendleft((nx, ny))
+                        else:
+                            dq.append((nx, ny))
+        return dist[m-1][n-1]
 
+s = Solution()
 
-for coin in coins:
-    for i in range(coin, amount + 1):
-        dp[i] += dp[i - coin]
-        print(f'coin:{coin},i:{i} dp:{dp}')
-
-
-'''
-coin=1, i=1
-dp[1] += dp[0]
-dp = [1, 1, 0, 0, 0, 0]
-
-coin=1, i=2
-dp[2] += dp[1]
-dp = [1, 1, 1, 0, 0, 0]
-
-coin=1, i=3
-dp[3] += dp[2]
-dp = [1, 1, 1, 1, 0, 0]
-
-coin=1, i=3
-dp[4] += dp[3]
-dp = [1, 1, 1, 1, 1, 0]
-
-coin=1, i=4
-dp[5] += dp[4]
-dp = [1, 1, 1, 1, 1, 1]
-
-coin=2, i=2
-dp[2] += dp[0]
-dp = [1, 1, 2, 1, 1, 1]
-
-coin=2, i=3
-dp[3] += dp[1]
-dp = [1, 1, 2, 2, 1, 1]
-
-coin=2, i=4
-dp[4] += dp[2]
-dp = [1, 1, 2, 2, 3, 1]
-
-coin=2, i=5
-dp[5] += dp[3]
-dp = [1, 1, 2, 2, 3, 3]
-
-coin=5, i=5
-dp[5] += dp[0]
-dp = [1, 1, 2, 2, 3, 4]
-
-
-'''
+grid = [[0,1,1],[1,1,0],[1,1,0]]
+ans = s.minimumObstacles(grid)
+print(ans)
