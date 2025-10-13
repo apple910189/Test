@@ -1,31 +1,22 @@
-from collections import deque
 from typing import List
-class Solution():
-    def minimumObstacles(self, grid: List[List[int]]) -> int:
 
-        m, n = len(grid), len(grid[0])
-        dist = [[float('inf')] * n for _ in range(m)]
-        dist[0][0] = 0
-        dq = deque([(0, 0)])
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        maxSum = -999
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                currSum =0
+                if j == i:
+                    currSum = nums[i]
+                    maxSum = max(maxSum,currSum)
+                else:
+                    for a in range(i,j+1):
+                        currSum = currSum + nums[a]
+                        print(f'{i} {j} {nums[a]}')
+                        maxSum = max(maxSum,currSum)
+        return maxSum
 
-        while dq:
-            x, y = dq.popleft()
-            for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
-                nx, ny = x+dx, y+dy
-                # print(f'xy {x}{y}, dxy {dx} {dy}, nxy {nx} {ny}')
-                if 0 <= nx < m and 0 <= ny < n:
-                    cost = dist[x][y] + grid[nx][ny]
-                    if cost < dist[nx][ny]:
-                        print(f'sam1 {cost}')
-                        dist[nx][ny] = cost
-                        if grid[nx][ny] == 0:
-                            dq.appendleft((nx, ny))
-                        else:
-                            dq.append((nx, ny))
-        return dist[m-1][n-1]
-
+nums = [5,4,-1,7,8]
 s = Solution()
-
-grid = [[0,1,1],[1,1,0],[1,1,0]]
-ans = s.minimumObstacles(grid)
+ans = s.maxSubArray(nums)
 print(ans)
