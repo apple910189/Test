@@ -10,15 +10,15 @@ class MeetingEvent:
         self.is_start_meeting = is_start_meeting
 
     # 定義自訂排序邏輯
-    def __lt__(self, other):
+    def __lt__(self, other):  # 問self比other小嗎？小的放前面。true表示self較小，false表示self較大
         # 若時間相同：結束事件要排在開始事件前
         if self.time == other.time:
             if self.is_start_meeting != other.is_start_meeting:
-                return not self.is_start_meeting
-            else:
+                return not self.is_start_meeting  # 如果A是end   -> true -> Ａ較小 -> A放前面
+            else:                                 # 如果A是start -> false -> A較大 -> A放後面
                 return False
         # 否則依時間早晚排序
-        return self.time < other.time
+        return self.time < other.time  # A=self 跟 B=other 比小，小的放前面
 
 
 class Solution:
