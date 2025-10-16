@@ -1,7 +1,7 @@
 from typing import List
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort(key=lambda x: x[0])  # 參數key是一個函數，而lamda是匿名函數，lamda 輸入: 輸出
         for i in range(len(intervals) - 1):
             if intervals[i][1] > intervals[i + 1][0]:
                 return False
