@@ -1,0 +1,83 @@
+很棒的題目👏，你這題其實是一個「動態事件觸發系統」結合「priority queue 雙向移動（上升/下降閾值切換）」的設計題。
+
+在 LeetCode 上沒有一題完全一樣的，但有幾題概念、數據結構或邏輯上非常相似的題目。以下是幾個類似題目和對應關係👇：
+
+🧩 1. LeetCode 295. Find Median from Data Stream
+
+概念相似點：雙堆維護動態資料
+
+題目要設計一個能「動態插入數字、隨時查詢中位數」的系統。
+
+解法通常用 min-heap + max-heap 來維持上下半區。
+
+📌 你的系統中：
+
+tickersAlertStream（max heap）維持未觸發警報（價格閾值）
+
+alertedDatas（min heap）維持已觸發、等待「回跌還原」的警報
+這跟 295 題的雙堆平衡邏輯非常像。
+
+👉 類似性：雙 priority_queue 動態轉移邏輯
+
+🧩 2. LeetCode 380. Insert Delete GetRandom O(1)
+
+概念相似點：資料的動態增刪查
+
+雖然題目是設計一個支援隨機取值的結構，但背後核心是「如何在動態資料中高效插入/刪除/查詢」。
+
+📌 你的系統中：
+
+setAlert 是動態插入
+
+updateTickerPrice 裡會做「彈出 alert → 放入另一個 heap」，也是動態更新的操作。
+
+👉 類似性：高效動態資料結構設計
+
+🧩 3. LeetCode 2034. Stock Price Fluctuation
+
+這題最接近你的主題！🔥
+
+題目：設計一個系統追蹤股票價格，支援更新某時間的價格、查詢目前最高和最低價。
+
+📌 相似之處：
+
+都是「股票 + 動態更新 + 查詢」的題型。
+
+LeetCode 2034 也用到了 priority queue + hash map 來追蹤最新狀態。
+
+雖然那題查的是「最高/最低」，但換成「超過某價位觸發 alert」就幾乎是同類問題。
+
+👉 類似性：股票事件追蹤 + 動態更新 + 堆結構維護
+
+🧩 4. LeetCode 706. Design HashMap
+
+用於理解你 unordered_map<string, priority_queue<...>> 的結構設計。
+
+題目練習設計「多層 map + value 結構」的封裝。
+
+👉 類似性：資料結構設計層次
+
+🧩 5. LeetCode 981. Time Based Key-Value Store
+
+儲存 key 對應於一系列時間和值，並根據當前時間查詢最接近值。
+
+這題考你如何維護動態變化的狀態。
+
+📌 相似之處：
+
+你是根據最新的「股票價格」更新 alert 狀態。
+
+這題是根據最新的「時間」查詢有效資料。
+
+👉 類似性：隨時間更新的狀態同步問題
+
+✅ 總結最接近的 LeetCode 題目：
+題號  題名  與本題的相似點
+2034    Stock Price Fluctuation 股票動態更新 + priority_queue 維護狀態
+295 Find Median from Data Stream    雙 heap 維護資料平衡
+981 Time Based Key-Value Store  隨時間更新、查詢有效狀態
+380 Insert Delete GetRandom O(1)    高效動態資料操作
+706 Design HashMap  map 結構設計基礎
+
+如果你想在 LeetCode 上練與這題邏輯最接近的實作題，從 2034 開始練是最好的選擇。
+然後可以進一步練 295，來熟悉雙堆切換的手法（這是你 alert 上下轉換的核心機制）。
