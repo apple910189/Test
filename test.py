@@ -1,4 +1,5 @@
 
 
-a = [1,2,3,4]
-print(a[0:1])
+chi = {}
+chi['a'] = 1
+print(type(chi))
